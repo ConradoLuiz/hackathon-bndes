@@ -1,3 +1,62 @@
 .homeContainer {
-  background-color: blue;
+  main {
+    background: var(--home-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 92vh;
+
+    .left {
+      width: 35%;
+
+      min-height: 350px;
+      h2,
+      h3 {
+        color: #fff;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        margin: 0 0 20px 0;
+        padding: 16px 50px;
+        border: none;
+        border-radius: 10px;
+        color: var(--accent-blue);
+        background-color: var(--accent-green);
+        font-size: 1.5rem;
+        font-weight: 700;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: opacity(0.8);
+        }
+      }
+
+      a {
+        display: block;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      & > * {
+        margin: 0 0 40px 0;
+      }
+    }
+    .right {
+      width: 50%;
+      text-align: right;
+      img {
+        width: 90%;
+      }
+    }
+  }
 }

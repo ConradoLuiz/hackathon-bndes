@@ -1,5 +1,31 @@
+:root {
+  --accent-blue: #1638ad;
+  --accent-green: #4cf891;
+  --light-blue: #2d83e9;
+  --home-gradient: linear-gradient(
+    242.53deg,
+    rgba(13, 124, 255, 0.87) 0%,
+    rgba(12, 17, 149, 0.8178) 100%
+  );
+}
+
+.light-theme {
+  --accent-blue: #1638ad;
+  --accent-green: #4cf891;
+  --light-blue: #2d83e9;
+  --home-gradient: linear-gradient(
+    242.53deg,
+    rgba(13, 124, 255, 0.87) 0%,
+    rgba(12, 17, 149, 0.8178) 100%
+  );
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
