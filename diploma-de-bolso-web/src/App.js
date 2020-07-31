@@ -1,11 +1,9 @@
 import React from "react";
+import "./global.css";
+import Routes from "./routes";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Diploma de bolso</h1>
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;
