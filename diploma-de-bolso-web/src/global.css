@@ -1,6 +1,8 @@
 :root {
   --accent-blue: #1638ad;
   --accent-green: #4cf891;
+  --dark-green: #109043;
+  --lighter-blue: #e6f7ff;
   --light-blue: #2d83e9;
   --footer-blue: #22283f;
   --home-gradient: linear-gradient(
@@ -13,7 +15,9 @@
 .light-theme {
   --accent-blue: #1638ad;
   --accent-green: #4cf891;
+  --dark-green: #109043;
   --light-blue: #2d83e9;
+  --lighter-blue: #e6f7ff;
   --footer-blue: #22283f;
   --home-gradient: linear-gradient(
     242.53deg,
