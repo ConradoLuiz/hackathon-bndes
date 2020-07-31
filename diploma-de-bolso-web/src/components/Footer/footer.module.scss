@@ -1,0 +1,29 @@
+.footerContainer {
+  background: var(--footer-blue);
+  padding: 10px 10%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > h4 {
+    margin: 0;
+    color: #fff;
+  }
+  span {
+    color: #fff;
+  }
+  .logo {
+    width: 50px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footerContainer {
+    display: grid;
+
+    & > * {
+      margin: 0 0 30px 0 !important;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 .homeContainer {
   main {
+    margin: 60px 0 0 0;
+
     background: var(--home-gradient);
     display: flex;
     justify-content: center;
@@ -58,5 +60,24 @@
         width: 90%;
       }
     }
+  }
+
+  .mainMobile {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 20px;
+  }
+
+  .mainLeftMobile {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    align-items: center;
+  }
+
+  .mainRightMobile {
+    width: 100% !important;
+    text-align: right;
+    margin: 40px 0;
   }
 }
