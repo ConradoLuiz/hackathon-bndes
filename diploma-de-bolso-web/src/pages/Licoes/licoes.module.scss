@@ -1,0 +1,24 @@
+.licoesPageContainer {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--lighter-blue);
+
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+
+  .licoesDescription {
+    margin: 68px 0 0 0;
+    background: var(--home-gradient);
+    width: 100%;
+    text-align: center;
+    padding: 22px 20px;
+
+    h2 {
+      color: #fff;
+      font-size: 2rem;
+      line-height: 2.7rem;
+    }
+  }
+}
