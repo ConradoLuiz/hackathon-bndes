@@ -68,4 +68,34 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.post("/:id/like", utils.isValidId, async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const licao = await Licoes.findByIdAndUpdate(
+      id,
+      {
+        $inc: { curtidas: 1 },
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!licao) {
+      res.status(404);
+      return res.json({
+        message: "Não foi encontrada nenhuma lição com esse id...",
+      });
+    }
+
+    return res.json({
+      licao,
+    });
+  } catch (error) {
+    res.status(500);
+    return next(error);
+  }
+});
+
 module.exports = router;
