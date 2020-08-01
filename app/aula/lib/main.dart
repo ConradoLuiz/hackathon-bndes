@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    Navigator.push(context, MaterialPageRoute(builder: (conxtet) => Licao()));
+   
     /*setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -68,16 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
-      ),
+      ),*/
+      backgroundColor: Colors.blue,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
           // Column is also a layout widget. It takes a list of children and
+
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
           //
@@ -91,15 +93,44 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+                margin: EdgeInsets.only(
+                    left: 0, top: 120.0, right: 0.0, bottom: 0.0),
+                child: Text(
+                  "Diploma de \n Bolso",
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+              margin: EdgeInsets.only(
+                  left: 2.0, top: 50.0, right: 6.0, bottom: 100.0),
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/graduation.png'),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+            Container(
+              height: 80,
+              width: 200,
+              child: RaisedButton(
+                  onPressed: () {
+                     Navigator.push(context, MaterialPageRoute(builder: (conxtet) => Licao()));
+                  },
+                  child: Center(child: Text("Lição",
+                   style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                  
+                  )),
+                  color: Colors.blue[700],
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(25.0))),
+            )
           ],
         ),
       ),
