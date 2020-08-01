@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Moment from "moment";
+import "moment/locale/pt-br";
+import { FiThumbsUp } from "react-icons/fi";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import useSWR from "swr";
 import { ImageCard } from "./ImageCard";
 import { useHistory } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { Card, Select } from "antd";
+import { Select } from "antd";
 import styles from "./licoesDisplay.module.scss";
+import { API_URL } from "../../services/diploma-api";
 
 const { Option } = Select;
 
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 export function LicoesDisplay() {
+  Moment.locale("pt-br");
+
+  const { data, error } = useSWR(`${API_URL}/licoes`, fetcher);
+  const [likedLessons, setLikedLessons] = useState([]);
+
   function handleSubmit(e) {
     e.preventDefault();
   }
+
   const history = useHistory();
 
   return (
@@ -35,26 +52,55 @@ export function LicoesDisplay() {
           </button>
         </form>
       </div>
+
       <div className={styles.cardsContainer}>
-        <ImageCard
-          imageUrl={
-            "https://www.traduzca.com/wp-content/uploads/2019/09/o-caminho-de-dom-pedro-i-ate-a-independencia-do-brasil-1000x480.jpg"
-          }
-          link={"/licoes/dhj3h5j5k3lh45j"}
-        >
-          <h3>Independência do Brasil</h3>
-          <div>31/07/2020</div>
-        </ImageCard>
-        <ImageCard
-          imageUrl={
-            "https://www.traduzca.com/wp-content/uploads/2019/09/o-caminho-de-dom-pedro-i-ate-a-independencia-do-brasil-1000x480.jpg"
-          }
-          link={"/licoes/dhj3h5j5k3lh45j"}
-          onClick={() => history.push("/licoes/dhjhrj3h")}
-        >
-          <h3>Independência do Brasil</h3>
-          <div>31/07/2020</div>
-        </ImageCard>
+        {data?.licoes ? (
+          data.licoes.map((licao) => (
+            <ImageCard
+              key={licao._id}
+              imageUrl={licao.imagem}
+              onClick={() => history.push(`/licoes/${licao._id}`)}
+            >
+              <h3>{licao.titulo}</h3>
+              <p style={{ textTransform: "capitalize" }}>{licao.materia}</p>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                {Moment(licao.dt_criado).format("MM-DD-YYYY")}
+                <div
+                  style={{
+                    color: "var(--dark-green)",
+                    minWidth: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    fontWeight: 600,
+                    fontSize: "1rem",
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    fetch(`${API_URL}/licoes/${licao._id}/like`, {
+                      method: "POST",
+                    });
+                    setLikedLessons([...likedLessons, licao._id]);
+                  }}
+                >
+                  <FiThumbsUp color="var(--dark-green)" size={24} />
+                  {"   "}
+                  {likedLessons.includes(licao._id)
+                    ? licao.curtidas + 1
+                    : licao.curtidas}
+                </div>
+              </div>
+            </ImageCard>
+          ))
+        ) : (
+          <Spin indicator={antIcon} />
+        )}
       </div>
     </div>
   );
