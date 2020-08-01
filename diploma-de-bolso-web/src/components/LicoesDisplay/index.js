@@ -21,8 +21,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export function LicoesDisplay() {
   Moment.locale("pt-br");
 
-  const { data, error } = useSWR(`${API_URL}/licoes`, fetcher);
-  const [likedLessons, setLikedLessons] = useState([]);
+  const { data, error, mutate } = useSWR(`${API_URL}/licoes`, fetcher);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -85,15 +84,26 @@ export function LicoesDisplay() {
                     e.stopPropagation();
                     fetch(`${API_URL}/licoes/${licao._id}/like`, {
                       method: "POST",
-                    });
-                    setLikedLessons([...likedLessons, licao._id]);
+                    })
+                      .then((res) => res.json())
+                      .then((_data) =>
+                        mutate(
+                          {
+                            ...data,
+                            licoes: data.licoes.map((_licao) =>
+                              _licao._id == _data.licao._id
+                                ? _data.licao
+                                : _licao
+                            ),
+                          },
+                          false
+                        )
+                      );
                   }}
                 >
                   <FiThumbsUp color="var(--dark-green)" size={24} />
                   {"   "}
-                  {likedLessons.includes(licao._id)
-                    ? licao.curtidas + 1
-                    : licao.curtidas}
+                  {licao.curtidas}
                 </div>
               </div>
             </ImageCard>
