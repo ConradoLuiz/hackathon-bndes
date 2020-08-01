@@ -5,7 +5,7 @@ import logo from "../../assets/graduation.svg";
 export function Header() {
   return (
     <header className={styles.headerContainer}>
-      <h1>Diploma de bolso</h1>
+      <h1>Diploma de Bolso</h1>
 
       <img src={logo} className={styles.logo} alt="Logo" />
     </header>

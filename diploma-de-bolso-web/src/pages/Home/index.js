@@ -59,6 +59,7 @@ export function Home() {
           </h3>
         </div>
       </div>
+
       <Footer />
     </div>
   );
