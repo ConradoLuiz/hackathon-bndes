@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Classnames from "classnames";
 import styles from "./home.module.scss";
 import OnlineReading from "../../assets/undraw_online_reading_np7n.svg";
@@ -26,8 +27,17 @@ export function Home() {
             Com o App do <strong>Diploma de bolso</strong>, aprender à distancia
             fica muito mais prazeroso
           </h3>
-          <button>Baixe agora</button>
-          <a href="#">Ou acesse nossa plataforma web</a>
+          <Link
+            to="/Diploma-de-Bolso.apk"
+            className={styles.downloadButton}
+            target="_blank"
+            download
+          >
+            Baixe agora
+          </Link>
+          <Link to="/licoes" className={styles.webApp}>
+            Ou acesse nossa plataforma web
+          </Link>
         </div>
         <div
           className={Classnames(

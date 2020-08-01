@@ -2,10 +2,11 @@
   background: var(--footer-blue);
   padding: 10px 10%;
 
+  margin-top: auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   & > h4 {
     margin: 0;
     color: #fff;

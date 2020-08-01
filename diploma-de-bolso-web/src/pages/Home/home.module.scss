@@ -26,7 +26,7 @@
         font-size: 1.5rem;
       }
 
-      button {
+      .downloadButton {
         margin: 0 0 20px 0;
         padding: 16px 50px;
         border: none;
@@ -42,11 +42,19 @@
         }
       }
 
-      a {
+      .webApp {
         display: block;
         color: #fff;
         font-size: 1.2rem;
         font-weight: 600;
+        margin: 40px 0 0 0;
+
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: opacity(0.8);
+          text-decoration: underline;
+        }
       }
 
       & > * {
