@@ -1,0 +1,71 @@
+:root {
+  --accent-blue: #1638ad;
+  --accent-green: #4cf891;
+  --dark-green: #109043;
+  --lighter-blue: #e6f7ff;
+  --light-blue: #2d83e9;
+  --footer-blue: #22283f;
+  --home-gradient: linear-gradient(
+    242.53deg,
+    rgba(13, 124, 255, 0.87) 0%,
+    rgba(12, 17, 149, 0.8178) 100%
+  );
+}
+
+.light-theme {
+  --accent-blue: #1638ad;
+  --accent-green: #4cf891;
+  --dark-green: #109043;
+  --light-blue: #2d83e9;
+  --lighter-blue: #e6f7ff;
+  --footer-blue: #22283f;
+  --home-gradient: linear-gradient(
+    242.53deg,
+    rgba(13, 124, 255, 0.87) 0%,
+    rgba(12, 17, 149, 0.8178) 100%
+  );
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif !important;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+a,
+input,
+button {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgb(189, 189, 189);
+}
