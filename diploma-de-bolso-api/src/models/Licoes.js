@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const joi = require("@hapi/joi");
 
 const LicaoSchema = mongoose.Schema({
   titulo: {
@@ -31,5 +32,23 @@ const LicaoSchema = mongoose.Schema({
   },
 });
 
+function validarLicao(licao) {
+  const schema = joi.object({
+    titulo: joi.string().required(),
+    conteudo: joi.string().required(),
+    materia: joi
+      .string()
+      .valid("português", "matemática", "história", "geografia")
+      .required(),
+    curtidas: joi.number().integer(),
+    imagem: joi.string().required(),
+    media: joi.string(),
+    dt_criado: joi.date(),
+  });
+
+  return schema.validate(licao);
+}
+
 exports.LicaoSchema = LicaoSchema;
+exports.validarLicao = validarLicao;
 exports.Licoes = mongoose.model("Licao", LicaoSchema, "Lições");
