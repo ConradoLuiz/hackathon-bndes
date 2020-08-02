@@ -35,8 +35,9 @@ export function Home() {
           >
             Baixe agora
           </Link>
+          <p>Ou acesse a nossa</p>
           <Link to="/licoes" className={styles.webApp}>
-            Ou acesse nossa plataforma web
+            Plataforma web
           </Link>
         </div>
         <div
