@@ -28,7 +28,7 @@ export function Home() {
             fica muito mais prazeroso
           </h3>
           <Link
-            to="/Diploma-de-Bolso.apk"
+            to="/Diploma-De-Bolso.apk"
             className={styles.downloadButton}
             target="_blank"
             download

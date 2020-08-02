@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Affix } from "antd";
 import { FiThumbsUp } from "react-icons/fi";
-import { RiArrowGoBackLine } from "react-icons/ri";
+import { RiArrowGoBackLine, RiHome4Line } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import useSWR from "swr";
 import Moment from "moment";
@@ -10,6 +10,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import styles from "./licaoPage.module.scss";
 import { useParams } from "react-router-dom";
+import { useDesktop } from "../../utils/mediaQueries";
 import { API_URL } from "../../services/diploma-api";
 import ReactPlayer from "react-player";
 
@@ -18,6 +19,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export function Licao(props) {
   Moment.locale("pt-br");
   const [affixed, setAffixed] = useState(false);
+  const isDesktop = useDesktop();
   const history = useHistory();
   const { licaoId } = useParams();
   const { data, error, mutate } = useSWR(
@@ -25,7 +27,6 @@ export function Licao(props) {
     fetcher
   );
 
-  useEffect(() => {}, []);
   return (
     <div className={styles.licaoPageContainer}>
       <Header />
@@ -81,7 +82,22 @@ export function Licao(props) {
               Criado em{" "}
               {data?.licao && Moment(data?.licao.dt_criado).format("LLL")}
             </span>
-            <ReactPlayer url="https://www.youtube.com/watch?v=Zha3tciqr2A"/>
+            {data?.licao?.media && (
+              <ReactPlayer
+                url={data?.licao?.media}
+                width={!isDesktop ? "100%" : "640px"}
+                height={!isDesktop ? "200px" : "360px"}
+                style={{
+                  alignSelf: "center",
+                }}
+              />
+            )}
+            {data?.licao?.mediaAutor && (
+              <h4 style={{ alignSelf: "center", margin: "20px 0" }}>
+                {data?.licao?.mediaAutor}
+              </h4>
+            )}
+
             <p>{data?.licao.conteudo}</p>
           </div>
         </div>
