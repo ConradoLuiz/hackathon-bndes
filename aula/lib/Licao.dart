@@ -9,17 +9,13 @@ class Licao extends StatefulWidget {
 }
 
 class _LicaoState extends State<Licao> {
-  int _counter = 0;
+  
    _LicaoState(int a){
      print(a);
 
    }
   
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +33,7 @@ class _LicaoState extends State<Licao> {
           children: <Widget>[
             Container(
                 child: Flexible(
+              //aqui é a lista de liçoes 
               child: ListView.builder(
                   padding: EdgeInsets.only(top: 10.0),
                   itemCount: 2,

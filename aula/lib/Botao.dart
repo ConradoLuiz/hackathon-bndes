@@ -11,6 +11,9 @@ class Botao {
     
   }
 
+  //essa funçao foi feita para ser usada na lista de botoes da licao, 
+  //obs tornar essa classe geral no futuro 
+
   Widget showBotao() {
     return Container(
       padding: EdgeInsets.only(left: 6.0, top: 15.0, right: 6.0, bottom: 15.0),

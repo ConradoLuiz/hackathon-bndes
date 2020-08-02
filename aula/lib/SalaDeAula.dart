@@ -88,7 +88,7 @@ class _SalaDeAulaState extends State<SalaDeAula> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-             
+             // obs o video é criado depois do texto olhar o FutureBuilder 
               color: Colors.blue[700],
               child: Column(children: <Widget>[
                 Container(child: AspectRatio(
@@ -148,6 +148,7 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                   ]
                 )
               ])),
+              //essa parte foi feita para nao mostrar o texto antes de ler o json 
           FutureBuilder(
               future: this.materia.loadData(),
               builder: (context, snapshot) {
@@ -160,15 +161,12 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                        return Text("carregando");
                   }
                   createVideo();
-                 // return Text("carregando");
-                  //return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
-                  
+                 
                 }
                 
                 
-               // createVideo();
                 return Text("carregando");
-               // return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
+               
               }),
 
        

@@ -14,20 +14,21 @@ class Mensagem extends StatefulWidget {
 }
 
 class _MensagemState extends State<Mensagem> {
-  int _counter = 0;
   
+  //  essa é uma lista de controladores para pegar os textos nos campos de escrita
   List<TextEditingController> controller=List();
+
   List _toDoList = [];
 
-  _MensagemState men;
+  
   _MensagemState() {
-    print(this._toDoList.length);
-    this.men=this;
+   
+    
     this.controller.add(TextEditingController());
     this.controller.add(TextEditingController());
     this.controller.add(TextEditingController());
   }
- 
+ // essa funçao adiciona o numero na lista de contatos
   void AddNumero(){
     if(this.controller[0].text!="" && this.controller[1].text!=""){
       setState(() {
@@ -43,6 +44,9 @@ class _MensagemState extends State<Mensagem> {
 
   }
   @override
+
+
+  //essa função foi usada para fazer a primeira leitura do json
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -55,6 +59,7 @@ class _MensagemState extends State<Mensagem> {
     });
   }
 
+//envia mensagem
   void sendMensagem(){
     if(this.controller[2].text!="" && this.controller[1].text!=""){
       setState(() {
@@ -123,7 +128,7 @@ class _MensagemState extends State<Mensagem> {
        
         
         RaisedButton(color:Colors.blue[700],child: Text("ADD"), onPressed: AddNumero),
-       
+       //aqui criamos a lista de botoes dos contatos
         Expanded(child:ListView.builder(
           
           itemCount:this._toDoList.length
@@ -132,6 +137,8 @@ class _MensagemState extends State<Mensagem> {
             
           })
           ),
+
+
         SingleChildScrollView( child:
           Container(
           color: Colors.blue[600],
@@ -155,9 +162,9 @@ class _MensagemState extends State<Mensagem> {
   }
  
 
-
-
-
+/* essas funçoes foram colocada para a leitura e escrita no json.
+obs: se der tempo criar uma classe para essa leitura 
+*/
  Future<File> getFile() async {
     final directory = await getApplicationDocumentsDirectory();
     String a ="${directory}/data1.json";

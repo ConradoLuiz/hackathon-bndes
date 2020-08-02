@@ -45,11 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
      
       backgroundColor: Colors.blue,
       body:SingleChildScrollView( child: Center(
-       
+       /*inserção de imagens, inserção de botoes e mudança de tela  
+       */
         child: Column(
          
 
           children: <Widget>[
+            
             Container(
                 margin: EdgeInsets.only(
                     left: 0, top: 120.0, right: 0.0, bottom: 0.0),

@@ -13,6 +13,7 @@ class SmsBotao {
   SmsBotao(
     this.list,this.controller
   );
+  // widget botao da lista de contatos
   Widget botao() {
     return Container(
         margin: EdgeInsets.only(top:10),
@@ -29,10 +30,7 @@ class SmsBotao {
             }));
   }
 
-  sendSms() {
-    String sms1 = "sms:" + list["numero"];
-    launch(sms1);
-  }
+  // função para enviar o sms
   sendSms2(){
     SmsSender sender = new SmsSender();
     //String address = someAddress();
