@@ -4,7 +4,22 @@ const { Licoes, validarLicao } = require("../models/Licoes");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const licoes = await Licoes.find().select("-conteudo");
+  const { titulo, materia, sort, orderby } = req.query;
+
+  const match = {};
+  const _sort = {};
+
+  if (titulo) {
+    match.titulo = new RegExp(`${titulo}`, "gi");
+  }
+  if (materia && materia !== "*") {
+    match.materia = materia;
+  }
+  if (sort && orderby) {
+    _sort[sort] = orderby === "desc" ? -1 : 1;
+  }
+
+  const licoes = await Licoes.find(match).select("-conteudo").sort(_sort);
 
   return res.json({
     licoes,
