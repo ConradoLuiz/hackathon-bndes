@@ -44,6 +44,8 @@
         width: 90%;
         max-width: 900px;
         text-align: justify;
+        display: flex;
+        flex-direction: column;
 
         h1 {
           font-size: 2rem;

@@ -3,7 +3,7 @@ import axios from "axios";
 import Moment from "moment";
 import "moment/locale/pt-br";
 import Classnames from "classnames";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiYoutube } from "react-icons/fi";
 import {
   FaSortAmountDown,
   FaSortAmountDownAlt,
@@ -152,7 +152,15 @@ export function LicoesDisplay() {
               onClick={() => history.push(`/licoes/${licao._id}`)}
             >
               <h3>{licao.titulo}</h3>
-              <p style={{ textTransform: "capitalize" }}>{licao.materia}</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p style={{ textTransform: "capitalize" }}>{licao.materia}</p>
+                {licao?.media && <FiYoutube size={24} />}
+              </div>
               <div
                 style={{
                   width: "100%",
