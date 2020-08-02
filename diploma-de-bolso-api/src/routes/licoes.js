@@ -93,6 +93,7 @@ router.post("/", async (req, res, next) => {
       curtidas: 0,
       imagem: req.body.imagem,
       media: req.body.media,
+      mediaAutor: req.body.mediaAutor,
       dt_criado: Date.now(),
     });
 
