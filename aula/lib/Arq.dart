@@ -9,6 +9,9 @@ import 'package:url_launcher/url_launcher.dart';
 class Arq 
 {
 
+Arq(){
+
+}
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
@@ -33,7 +36,7 @@ Future<String> readCounter() async {
 
     // Read the file.
     String contents = await file.readAsString();
-
+    
     return contents;
   } catch (e) {
     // If encountering an error, return 0.

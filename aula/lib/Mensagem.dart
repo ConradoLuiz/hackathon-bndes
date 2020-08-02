@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
+import 'package:sms/sms.dart';
 import 'package:aula/SmsBotao.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,21 +15,27 @@ class Mensagem extends StatefulWidget {
 
 class _MensagemState extends State<Mensagem> {
   int _counter = 0;
-  TextEditingController controllerNome= TextEditingController();
-  TextEditingController controllerNumero= TextEditingController();
+  
+  List<TextEditingController> controller=List();
   List _toDoList = [];
+
+  _MensagemState men;
   _MensagemState() {
     print(this._toDoList.length);
+    this.men=this;
+    this.controller.add(TextEditingController());
+    this.controller.add(TextEditingController());
+    this.controller.add(TextEditingController());
   }
  
   void AddNumero(){
-    if(this.controllerNome.text!="" && this.controllerNumero.text!=""){
+    if(this.controller[0].text!="" && this.controller[1].text!=""){
       setState(() {
         Map<String,dynamic> novoContato=Map();
-        novoContato["nome"]=this.controllerNome.text;
-        novoContato["numero"]=this.controllerNumero.text;
-        this.controllerNome.text="";
-        this.controllerNumero.text="";
+        novoContato["nome"]=this.controller[0].text;
+        novoContato["numero"]=this.controller[1].text;
+        this.controller[0].text="";
+        this.controller[1].text="";
         this._toDoList.add(novoContato);
         saveData();
     });
@@ -46,6 +53,23 @@ class _MensagemState extends State<Mensagem> {
       _toDoList=json.decode(data);
        });
     });
+  }
+
+  void sendMensagem(){
+    if(this.controller[2].text!="" && this.controller[1].text!=""){
+      setState(() {
+        Map<String,dynamic> novaMensagem=Map();
+        novaMensagem["mensagem"]=this.controller[2].text;
+        novaMensagem["numero"]=this.controller[1].text;
+        this.controller[2].text="";
+        this.controller[1].text="";
+        SmsSender sender = new SmsSender();
+        sender.sendSms(new SmsMessage(novaMensagem["numero"], novaMensagem["mensagem"]));
+    });
+    
+    }
+    
+
   }
 
   
@@ -70,9 +94,9 @@ class _MensagemState extends State<Mensagem> {
               child: Column(children: <Widget>[
         Container(
           color: Colors.blue[600],
-          margin: EdgeInsets.fromLTRB(6.0, 10.0, 6.0, 0.0),
+          margin: EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 10.0),
           child:  TextField(
-            controller: controllerNome,
+            controller: controller[0],
             decoration: InputDecoration(
               labelText: 'Nome',
               border: OutlineInputBorder(),
@@ -81,11 +105,12 @@ class _MensagemState extends State<Mensagem> {
           ),
           
         ),
+        
         Container(
           color: Colors.blue[600],
-          margin: EdgeInsets.fromLTRB(6.0, 5.0, 6.0, 10.0),
+          margin: EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 10.0),
           child:  TextField(
-            controller: controllerNumero,
+            controller: controller[1],
             decoration: InputDecoration(
               labelText: 'Numero',
               border: OutlineInputBorder(),
@@ -94,20 +119,44 @@ class _MensagemState extends State<Mensagem> {
           ),
           
         ),
+
+       
         
         RaisedButton(color:Colors.blue[700],child: Text("ADD"), onPressed: AddNumero),
+       
         Expanded(child:ListView.builder(
           
           itemCount:this._toDoList.length
           ,itemBuilder: (context,index){
-            return SmsBotao(this._toDoList[index]).botao();
+            return SmsBotao(this._toDoList[index],this.controller).botao();
             
-          })),
+          })
+          ),
+        SingleChildScrollView( child:
+          Container(
+          color: Colors.blue[600],
+          margin: EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 10.0),
+          child:  TextField(
+            controller: controller[2],
+            decoration: InputDecoration(
+              labelText: 'mensagem',
+              border: OutlineInputBorder(),
+              labelStyle: TextStyle(color: Colors.black)
+            )
+          ),
+          
+        ),
+        )
+       
       ])),
+      
       
     );
   }
-  
+ 
+
+
+
 
  Future<File> getFile() async {
     final directory = await getApplicationDocumentsDirectory();
@@ -130,6 +179,7 @@ class _MensagemState extends State<Mensagem> {
       return null;
     }
   }
+
 
 
 

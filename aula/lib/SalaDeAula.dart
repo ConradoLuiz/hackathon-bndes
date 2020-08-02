@@ -15,22 +15,25 @@ class SalaDeAula extends StatefulWidget {
 
 class _SalaDeAulaState extends State<SalaDeAula> {
   VideoPlayerController _controller;
-
-  VoidCallback listener;
+  int v = 0;
+  VoidCallback listener; 
   int _counter = 0;
-  String aula;
+  String aula = " ";
   JsonManager materia = JsonManager();
   int carregarVideo=0;
-
+  Arq arquivo ;
   _SalaDeAulaState(){
     
     
   } 
 
   void initState() {
-    Arq().readCounter().then((dado){
+    this.arquivo=Arq();
+    this.arquivo.readCounter().then((dado){
       setState(() {
+
         this.aula =dado;
+        
         
       });
       
@@ -39,6 +42,7 @@ class _SalaDeAulaState extends State<SalaDeAula> {
     listener = () {
       setState(() {});
     };
+    this.materia.loadData();
     
   }
 
@@ -147,11 +151,24 @@ class _SalaDeAulaState extends State<SalaDeAula> {
           FutureBuilder(
               future: this.materia.loadData(),
               builder: (context, snapshot) {
-                if (snapshot == null || this.aula==null) {
-                  return Text("carregando");
+                if (snapshot != null && this.aula!=" ") {
+                  try {
+                    createVideo();
+                    return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
+
+                  }catch(e){
+                       return Text("carregando");
+                  }
+                  createVideo();
+                 // return Text("carregando");
+                  //return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
+                  
                 }
-                 createVideo();
-                return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
+                
+                
+               // createVideo();
+                return Text("carregando");
+               // return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
               }),
 
        

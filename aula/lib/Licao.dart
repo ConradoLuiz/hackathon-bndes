@@ -2,15 +2,19 @@ import 'package:aula/Botao.dart';
 import 'package:flutter/material.dart';
 
 class Licao extends StatefulWidget {
-  Licao({Key key}) : super(key: key);
-
+  Licao({Key key, this.a}) : super(key: key);
+  int a;
   @override
-  _LicaoState createState() => _LicaoState();
+  _LicaoState createState() => _LicaoState(this.a);
 }
 
 class _LicaoState extends State<Licao> {
   int _counter = 0;
+   _LicaoState(int a){
+     print(a);
 
+   }
+  
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -35,7 +39,7 @@ class _LicaoState extends State<Licao> {
                 child: Flexible(
               child: ListView.builder(
                   padding: EdgeInsets.only(top: 10.0),
-                  itemCount: 5,
+                  itemCount: 2,
                   itemBuilder: (BuildContext context, int index) {
                     return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -50,4 +54,6 @@ class _LicaoState extends State<Licao> {
       ),
     );
   }
+
+  
 }
