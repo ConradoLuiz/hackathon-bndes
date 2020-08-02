@@ -11,6 +11,7 @@ import { Footer } from "../../components/Footer";
 import styles from "./licaoPage.module.scss";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../services/diploma-api";
+import ReactPlayer from "react-player";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -80,6 +81,7 @@ export function Licao(props) {
               Criado em{" "}
               {data?.licao && Moment(data?.licao.dt_criado).format("LLL")}
             </span>
+            <ReactPlayer url="https://www.youtube.com/watch?v=Zha3tciqr2A"/>
             <p>{data?.licao.conteudo}</p>
           </div>
         </div>
