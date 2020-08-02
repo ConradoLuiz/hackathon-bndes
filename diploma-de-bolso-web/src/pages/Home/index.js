@@ -27,14 +27,14 @@ export function Home() {
             Com o App do <strong>Diploma de bolso</strong>, aprender à distancia
             fica muito mais prazeroso
           </h3>
-          <Link
-            to="/Diploma-De-Bolso.apk"
+          <a
+            href="https://drive.google.com/uc?id=1jfCdbV8U7a0m9rDSzyBd4J-cYpt_z5-i&export=download"
             className={styles.downloadButton}
             target="_blank"
             download
           >
             Baixe agora
-          </Link>
+          </a>
           <p>Ou acesse a nossa</p>
           <Link to="/licoes" className={styles.webApp}>
             Plataforma web
