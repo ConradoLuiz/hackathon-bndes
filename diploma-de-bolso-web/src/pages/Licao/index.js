@@ -30,9 +30,10 @@ export function Licao(props) {
       <Header />
       <main>
         <div
+          className={styles.mainImageDiv}
           style={{
             width: "100%",
-            minHeight: "80vh",
+            minHeight: "60vh",
             backgroundImage: `url(${data?.licao.imagem})`,
             backgroundPosition: "top",
             backgroundSize: "cover",

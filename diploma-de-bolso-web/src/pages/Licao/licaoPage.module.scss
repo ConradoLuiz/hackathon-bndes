@@ -11,6 +11,13 @@
     width: 100%;
     margin: 70px 0;
 
+    @media (max-width: 750px) {
+      .mainImageDiv {
+        width: 100%;
+        min-height: 200px !important;
+      }
+    }
+
     .textArea {
       width: 100%;
       display: flex;
