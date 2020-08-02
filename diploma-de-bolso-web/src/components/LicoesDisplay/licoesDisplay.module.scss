@@ -21,7 +21,7 @@
         margin: 5px 2px;
       }
 
-      input {
+      .inputTitulo {
         padding: 10px;
         border: none;
         border-radius: 10px;
@@ -43,7 +43,7 @@
         background-color: var(--accent-green);
         font-size: 1rem;
         font-weight: 700;
-
+        cursor: pointer;
         display: flex;
         align-items: center;
 

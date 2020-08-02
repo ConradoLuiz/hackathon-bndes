@@ -89,6 +89,7 @@ export function LicoesDisplay() {
           }}
         >
           <input
+            className={styles.inputTitulo}
             type="text"
             placeholder="Pesquise pelo título da lição..."
             value={titulo}
