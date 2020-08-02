@@ -1,6 +1,6 @@
 const express = require("express");
 const utils = require("../utils");
-const { Licoes, validarLicao } = require("../models/Licoes");
+const { Licoes, validarLicao, listaMaterias } = require("../models/Licoes");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -46,6 +46,33 @@ router.get("/:id", utils.isValidId, async (req, res, next) => {
     res.status(500);
     return next(error);
   }
+});
+
+router.put("/:id", utils.isValidId, async (req, res, next) => {
+  const { id } = req.params;
+  const { titulo, conteudo, materia, imagem, media, mediaAutor } = req.body;
+
+  const update = {};
+
+  if (titulo) update.titulo = titulo;
+  if (conteudo) update.conteudo = conteudo;
+  if (materia && listaMaterias.includes(materia)) update.materia = materia;
+  if (imagem) update.imagem = imagem;
+  if (media) update.media = media;
+  if (mediaAutor) update.mediaAutor = mediaAutor;
+
+  const nova_licao = await Licoes.findByIdAndUpdate(id, update, { new: true });
+
+  if (!nova_licao) {
+    res.status(404);
+    return res.json({
+      message:
+        "Não foi encontrado nenhuma lição com esse Id... Nada foi alterado...",
+    });
+  }
+
+  res.status(200);
+  return res.json({ licao: nova_licao });
 });
 
 router.post("/", async (req, res, next) => {

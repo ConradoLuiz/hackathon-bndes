@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const joi = require("@hapi/joi");
 
+const listaMaterias = ["português", "matemática", "história", "geografia"];
 const LicaoSchema = mongoose.Schema({
   titulo: {
     type: String,
@@ -13,7 +14,7 @@ const LicaoSchema = mongoose.Schema({
   materia: {
     type: String,
     required: true,
-    enum: ["português", "matemática", "história", "geografia"],
+    enum: listaMaterias,
   },
   curtidas: {
     type: Number,
@@ -23,6 +24,9 @@ const LicaoSchema = mongoose.Schema({
     type: String,
   },
   media: {
+    type: String,
+  },
+  mediaAutor: {
     type: String,
   },
   dt_criado: {
@@ -43,6 +47,7 @@ function validarLicao(licao) {
     curtidas: joi.number().integer(),
     imagem: joi.string().required(),
     media: joi.string(),
+    mediaAutor: joi.string(),
     dt_criado: joi.date(),
   });
 
@@ -51,4 +56,5 @@ function validarLicao(licao) {
 
 exports.LicaoSchema = LicaoSchema;
 exports.validarLicao = validarLicao;
+exports.listaMaterias = listaMaterias;
 exports.Licoes = mongoose.model("Licao", LicaoSchema, "Lições");
