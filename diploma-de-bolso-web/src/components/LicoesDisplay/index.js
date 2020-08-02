@@ -14,12 +14,12 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import useSWR, { mutate } from "swr";
 import { ImageCard } from "./ImageCard";
+import { CardsLoading } from "./CardsLoading";
 import { useHistory } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { Select } from "antd";
 import styles from "./licoesDisplay.module.scss";
 import { API_URL } from "../../services/diploma-api";
-
 const { Option } = Select;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -200,7 +200,7 @@ export function LicoesDisplay() {
             </ImageCard>
           ))
         ) : (
-          <Spin indicator={antIcon} />
+          <CardsLoading />
         )}
       </div>
     </div>
