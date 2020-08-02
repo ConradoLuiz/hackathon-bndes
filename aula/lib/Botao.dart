@@ -1,11 +1,14 @@
+import 'package:aula/Arq.dart';
 import 'package:aula/SalaDeAula.dart';
 import 'package:flutter/material.dart';
 
 class Botao {
-
+  int index;
   BuildContext context;
-  Botao(BuildContext context) {
+  Botao(BuildContext context, int index) {
+    this.index=index;
     this.context = context;
+    
   }
 
   Widget showBotao() {
@@ -15,10 +18,16 @@ class Botao {
       width: 120,
       child: RaisedButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (conxtet) => SalaDeAula()));
+            print(this.index);
+            Arq().writeCounter(this.index);
+            
+
+
+
+
+            Navigator.push(context, MaterialPageRoute(builder: (conxtet) => SalaDeAula()));
           },
-          child: Center(child: Text("Lição")),
+          child: Center(child: Text("Lição $index")),
           color: Colors.blue[700],
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(25.0))),

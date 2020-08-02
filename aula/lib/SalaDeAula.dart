@@ -1,3 +1,4 @@
+import 'package:aula/Arq.dart';
 import 'package:aula/JsonManager.dart';
 import 'package:aula/Licao.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,9 @@ import 'package:async/async.dart';
 import 'package:video_player/video_player.dart';
 
 class SalaDeAula extends StatefulWidget {
+  
   SalaDeAula({Key key}) : super(key: key);
-
+  
   @override
   _SalaDeAulaState createState() => _SalaDeAulaState();
 }
@@ -16,21 +18,33 @@ class _SalaDeAulaState extends State<SalaDeAula> {
 
   VoidCallback listener;
   int _counter = 0;
-
+  String aula;
   JsonManager materia = JsonManager();
+  int carregarVideo=0;
 
-  _SalaDeAulaState() {}
+  _SalaDeAulaState(){
+    
+    
+  } 
 
   void initState() {
+    Arq().readCounter().then((dado){
+      setState(() {
+        this.aula =dado;
+        
+      });
+      
+    });
+
     listener = () {
       setState(() {});
     };
-    createVideo();
+    
   }
 
   void createVideo() {
     if (this._controller == null) {
-      this._controller = VideoPlayerController.asset("assets/teste.mp4");
+      this._controller = VideoPlayerController.asset(this.materia.conteudo["video"+this.aula]);
       this._controller.addListener(listener);
       this._controller.setVolume(1.0);
       this._controller.initialize();
@@ -44,12 +58,7 @@ class _SalaDeAulaState extends State<SalaDeAula> {
   }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back ) , onPressed: (){ 
@@ -57,8 +66,7 @@ class _SalaDeAulaState extends State<SalaDeAula> {
           this._controller=null;
           Navigator.pop(context);
           }) ,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        
         title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text("Diploma de Bolso"),
           Container(
@@ -84,7 +92,9 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                   child: Container(
                     child: (this._controller == null
                         ? Container()
-                        : VideoPlayer(this._controller)),
+                        :
+                         VideoPlayer(this._controller)                        
+                      ),
                   ),
                 )),
                 Row(
@@ -92,7 +102,8 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                   //botao play e pause
                   children: <Widget>[
                     Container(
-                      height: 30,
+                      margin: EdgeInsets.fromLTRB(0.0, 8.0, 3.0, 8.0),
+                      height: 40,
                       width: 100,
                       child: RaisedButton(
                       onPressed: () {
@@ -105,12 +116,13 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                           fontWeight: FontWeight.bold),
                   
                   )),
-                  color: Colors.blue[700],
+                  color: Colors.blue[800],
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0))),
             ),
                    Container(
-                      height: 30,
+                     margin: EdgeInsets.fromLTRB(3.0, 8.0, 0.0, 8.0),
+                      height: 40,
                       width: 100,
                       child: RaisedButton(
                       onPressed: () {
@@ -123,36 +135,30 @@ class _SalaDeAulaState extends State<SalaDeAula> {
                           fontWeight: FontWeight.bold),
                   
                   )),
-                  color: Colors.blue[700],
+                  color: Colors.blue[800],
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0))),
             ),
 
-                  //fim botao play e pouse  
+                  
                   ]
                 )
               ])),
           FutureBuilder(
-              future: this.materia.loadCountryData(),
+              future: this.materia.loadData(),
               builder: (context, snapshot) {
-                if (snapshot == null) {
+                if (snapshot == null || this.aula==null) {
                   return Text("carregando");
                 }
-                return Text(this.materia.conteudo['licao']);
+                 createVideo();
+                return Container(padding:EdgeInsets.fromLTRB(8.0, 6.0, 8.0, 8.0) , child:Text(this.materia.conteudo["texto"+this.aula]));
               }),
 
-          //Text(this.a['licao']),
+       
         ],
       )
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          playVideo();
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+ 
     );
   }
 }

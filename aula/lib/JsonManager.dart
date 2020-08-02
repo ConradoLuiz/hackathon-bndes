@@ -10,7 +10,7 @@ class JsonManager{
   
  
 
-  Future<Map> loadCountryData() async {
+  Future<Map> loadData() async {
     try {
         
         final data = await rootBundle.loadString("assets/dados.json");

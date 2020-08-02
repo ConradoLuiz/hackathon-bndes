@@ -40,8 +40,8 @@ class _LicaoState extends State<Licao> {
                     return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Botao(context).showBotao(),
-                          Botao(context).showBotao()
+                          Botao(context,2*index).showBotao(),
+                          Botao(context,(2*index)+1).showBotao()
                         ]);
                   }),
             ))
